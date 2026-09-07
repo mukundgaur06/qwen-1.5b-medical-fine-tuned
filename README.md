@@ -2,208 +2,94 @@
 base_model: Qwen/Qwen2.5-1.5B-Instruct
 library_name: peft
 pipeline_tag: text-generation
+language:
+- en
+license: apache-2.0
 tags:
 - base_model:adapter:Qwen/Qwen2.5-1.5B-Instruct
 - lora
+- qlora
+- medical
 - sft
 - transformers
 - trl
 ---
 
-# Model Card for Model ID
+# Qwen2.5-1.5B Medical Fine-Tuned Assistant
 
-<!-- Provide a quick summary of what the model is/does. -->
+This repository contains a medical domain-adapted version of **Qwen2.5-1.5B-Instruct**, fine-tuned using Parameter-Efficient Fine-Tuning (PEFT) with **QLoRA (4-bit quantization)**. The model is optimized to provide detailed, contextual responses to medical questions based on clinical context.
 
-
+---
 
 ## Model Details
 
 ### Model Description
 
-<!-- Provide a longer summary of what this model is. -->
+- **Developed by:** Mukund Gaur (`mukundgaur06`)
+- **Model Type:** Causal Language Model (Adapter/LoRA)
+- **Base Model:** `Qwen/Qwen2.5-1.5B-Instruct`
+- **Language(s):** English
+- **License:** Apache 2.0
+- **Fine-tuning Tech:** PEFT / QLoRA (4-bit)
 
+### Model Sources
 
+- **Repository:** [mukundgaur06/qwen-1.5b-medical-fine-tuned](https://github.com/mukundgaur06/qwen-1.5b-medical-fine-tuned)
 
-- **Developed by:** [More Information Needed]
-- **Funded by [optional]:** [More Information Needed]
-- **Shared by [optional]:** [More Information Needed]
-- **Model type:** [More Information Needed]
-- **Language(s) (NLP):** [More Information Needed]
-- **License:** [More Information Needed]
-- **Finetuned from model [optional]:** [More Information Needed]
-
-### Model Sources [optional]
-
-<!-- Provide the basic links for the model. -->
-
-- **Repository:** [More Information Needed]
-- **Paper [optional]:** [More Information Needed]
-- **Demo [optional]:** [More Information Needed]
+---
 
 ## Uses
 
-<!-- Address questions around how the model is intended to be used, including the foreseeable users of the model and those affected by the model. -->
-
 ### Direct Use
 
-<!-- This section is for the model use without fine-tuning or plugging into a larger ecosystem/app. -->
-
-[More Information Needed]
-
-### Downstream Use [optional]
-
-<!-- This section is for the model use when fine-tuned for a task, or when plugged into a larger ecosystem/app -->
-
-[More Information Needed]
+This model is intended to assist with natural language processing tasks in the medical domain, such as summarizing patient context, answering clinical queries, and generating context-aware responses.
 
 ### Out-of-Scope Use
 
-<!-- This section addresses misuse, malicious use, and uses that the model will not work well for. -->
+* **Primary Diagnosis or Medical Advice:** This model is **NOT** a substitute for professional medical advice, diagnosis, or treatment. 
+* **Critical Medical Decision-Making:** Never rely on model outputs for emergency medical decisions without human-in-the-loop validation by licensed health professionals.
 
-[More Information Needed]
-
-## Bias, Risks, and Limitations
-
-<!-- This section is meant to convey both technical and sociotechnical limitations. -->
-
-[More Information Needed]
-
-### Recommendations
-
-<!-- This section is meant to convey recommendations with respect to the bias, risk, and technical limitations. -->
-
-Users (both direct and downstream) should be made aware of the risks, biases and limitations of the model. More information needed for further recommendations.
+---
 
 ## How to Get Started with the Model
 
-Use the code below to get started with the model.
-
-[More Information Needed]
-
-## Training Details
-
-### Training Data
-
-<!-- This should link to a Dataset Card, perhaps with a short stub of information on what the training data is all about as well as documentation related to data pre-processing or additional filtering. -->
-
-[More Information Needed]
-
-### Training Procedure
-
-<!-- This relates heavily to the Technical Specifications. Content here should link to that section when it is relevant to the training procedure. -->
-
-#### Preprocessing [optional]
-
-[More Information Needed]
-
-
-#### Training Hyperparameters
-
-- **Training regime:** [More Information Needed] <!--fp32, fp16 mixed precision, bf16 mixed precision, bf16 non-mixed precision, fp16 non-mixed precision, fp8 mixed precision -->
-
-#### Speeds, Sizes, Times [optional]
-
-<!-- This section provides information about throughput, start/end time, checkpoint size if relevant, etc. -->
-
-[More Information Needed]
-
-## Evaluation
-
-<!-- This section describes the evaluation protocols and provides the results. -->
-
-### Testing Data, Factors & Metrics
-
-#### Testing Data
-
-<!-- This should link to a Dataset Card if possible. -->
-
-[More Information Needed]
-
-#### Factors
-
-<!-- These are the things the evaluation is disaggregating by, e.g., subpopulations or domains. -->
-
-[More Information Needed]
-
-#### Metrics
-
-<!-- These are the evaluation metrics being used, ideally with a description of why. -->
-
-[More Information Needed]
-
-### Results
-
-[More Information Needed]
-
-#### Summary
-
-
-
-## Model Examination [optional]
-
-<!-- Relevant interpretability work for the model goes here -->
-
-[More Information Needed]
-
-## Environmental Impact
-
-<!-- Total emissions (in grams of CO2eq) and additional considerations, such as electricity usage, go here. Edit the suggested text below accordingly -->
-
-Carbon emissions can be estimated using the [Machine Learning Impact calculator](https://mlco2.github.io/impact#compute) presented in [Lacoste et al. (2019)](https://arxiv.org/abs/1910.09700).
-
-- **Hardware Type:** [More Information Needed]
-- **Hours used:** [More Information Needed]
-- **Cloud Provider:** [More Information Needed]
-- **Compute Region:** [More Information Needed]
-- **Carbon Emitted:** [More Information Needed]
-
-## Technical Specifications [optional]
-
-### Model Architecture and Objective
-
-[More Information Needed]
-
-### Compute Infrastructure
-
-[More Information Needed]
-
-#### Hardware
-
-[More Information Needed]
-
-#### Software
-
-[More Information Needed]
-
-## Citation [optional]
-
-<!-- If there is a paper or blog post introducing the model, the APA and Bibtex information for that should go in this section. -->
-
-**BibTeX:**
-
-[More Information Needed]
-
-**APA:**
-
-[More Information Needed]
-
-## Glossary [optional]
-
-<!-- If relevant, include terms and calculations in this section that can help readers understand the model or model card. -->
-
-[More Information Needed]
-
-## More Information [optional]
-
-[More Information Needed]
-
-## Model Card Authors [optional]
-
-[More Information Needed]
-
-## Model Card Contact
-
-[More Information Needed]
-### Framework versions
-
-- PEFT 0.20.0
+Run the snippet below to load the base model along with your fine-tuned adapter for inference:
+
+```python
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
+
+# 1. Base Model & Tokenizer
+base_model_name = "Qwen/Qwen2.5-1.5B-Instruct"
+tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+
+base_model = AutoModelForCausalLM.from_pretrained(
+    base_model_name,
+    torch_dtype=torch.float16,
+    device_map="auto"
+)
+
+# 2. Load Local Adapter Weights
+adapter_path = "."  # Direct path to repo folder with adapter_config.json
+model = PeftModel.from_pretrained(base_model, adapter_path)
+
+# 3. Inference Example
+question = "What are the common symptoms of type 2 diabetes?"
+context = "Patient is a 45-year-old male presenting with increased thirst and fatigue."
+
+prompt = f"### Question: {question}\n\n### Context: {context}\n\n### Answer:"
+inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+
+with torch.no_grad():
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=256,
+        temperature=0.7,
+        top_p=0.9,
+        do_sample=True,
+        pad_token_id=tokenizer.pad_token_id
+    )
+
+response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+print(response.split("### Answer:")[1].strip())
